@@ -1,0 +1,38 @@
+{% extends 'etudiants_app/base.html' %}
+
+{% block titre %}Gestion des informations des etudiants{% endblock %}
+
+{% block contenu %}
+    <div class="row">
+        <div class="col-sm-4">
+            <h4 class="text-center alert alert-info">Ajoutez un nouvel étudiant</h4>
+            <form action="" method="POST">
+                {#                on renforce la securité de notre de données qui entreront dans notre formulaire avec l'instruction#}
+                {#                ci-dessous#}
+                {% csrf_token %}
+                {#                as_p dans {{ form.as_p }} permet la  génération des les champs d'un formulaire de manière à les afficher sous forme des #}
+                {#                paragraphes (p) on peut aussi les afficher sous forme des (ul) liste non ordonnées#}
+                {{ form.as_p }}
+                {#                Ceci est un bouton qu'on crée avec un type submit pour dire soumettre#}
+                <input type="submit" class="btn btn-success" value="Ajouter">
+            </form>
+        </div>
+
+        <div class="col-sm-8">
+            <h4 class="text-center alert alert-info">Montrer le sinformations de l'étudiant</h4>
+{#            <form action="" method="POST">#}
+                {#                on renforce la securité de notre de données qui entreront dans notre formulaire avec l'instruction#}
+                {#                ci-dessous#}
+{#                {% csrf_token %}#}
+                {#                as_p dans {{ form.as_p }} permet la  génération des les champs d'un formulaire de manière à les afficher sous forme des #}
+                {#                paragraphes (p) on peut aussi les afficher sous forme des (ul) liste non ordonnées#}
+{#                {{ form.as_p }}#}
+                {#                Ceci est un bouton qu'on crée avec un type submit pour dire soumettre#}
+{#                <input type="submit" class="btn btn-success" value="Ajouter">#}
+            </form>
+        </div>
+
+    </div>
+{% endblock %}
+
+

@@ -1,0 +1,24 @@
+{#Alors pour pouvoir charger les fichiers statics pour dire les fichiers tels que des fichiers css et js on doit augmenter#}
+{#cette balise qui nous permettra d'utiliser le mot clé static dans le href et le src #}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block titre %}{% endblock %}</title>
+    {#    ici on ajoute notre fichier css et dans le href ou src en django on utilise les balises de template avec le mot clé static#}
+    {#    href ou src = "{% static chemin_vers_fichier %}#}
+    <link rel="stylesheet" href="{% static 'etudiants_app/css/bootstrap.css' %}">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center alert alert-danger">Opérations CRUD basées sur la gestion des étudiants</h2>
+    {% block contenu %}{% endblock %}
+</div>
+
+{#ici on ajoute des fichier javaScript dans notre fichier html#}
+<script src="{% static 'etudiants_app/js/jquery.js' %}"></script>
+<script src="{% static 'etudiants_app/js/bootstrap.js' %}"></script>
+<script src="{% static 'etudiants_app/js/pooper.js' %}"></script>
+</body>
+</html>
