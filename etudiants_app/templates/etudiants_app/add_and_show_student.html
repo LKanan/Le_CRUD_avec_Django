@@ -18,21 +18,63 @@
             </form>
         </div>
 
-        <div class="col-sm-8">
-            <h4 class="text-center alert alert-info">Montrer le sinformations de l'étudiant</h4>
-{#            <form action="" method="POST">#}
-                {#                on renforce la securité de notre de données qui entreront dans notre formulaire avec l'instruction#}
-                {#                ci-dessous#}
-{#                {% csrf_token %}#}
-                {#                as_p dans {{ form.as_p }} permet la  génération des les champs d'un formulaire de manière à les afficher sous forme des #}
-                {#                paragraphes (p) on peut aussi les afficher sous forme des (ul) liste non ordonnées#}
-{#                {{ form.as_p }}#}
-                {#                Ceci est un bouton qu'on crée avec un type submit pour dire soumettre#}
-{#                <input type="submit" class="btn btn-success" value="Ajouter">#}
-            </form>
-        </div>
+        <div class="col-sm-7 offset-1">
+            <h4 class="text-center alert alert-info">Montrer les informations de l'étudiant</h4>
+{#           On met une condition pour tester si la base de données contient quelque chose pour afficher ce tableau#}
+            {% if stu %}
+{#                On est parti chercher un exemplaire de table sur le site officiel de bootstrap#}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Mot de passe</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+{#                        On crée une boucle for qui va créer des ligne pour toutes les données de la base de données#}
+{#                        stu represente la base de données selon comme on l'a notifié dans le contexte de la vue#}
+                        {% for st in stu %}
+                            <tr>
+                                <th scope="row">{{ st.id }}</th>
+                                <td>{{ st.name }}</td>
+                                <td>{{ st.email }}</td>
+                                <td>{{ st.password }}</td>
+                                <td>
+                                    <a href="{% url 'modification_données' st.id %}" class="btn btn-warning btn-sm">Modifier</a>
+{#                                    On crée un formulaire qui va contenir un bouton de suppresion, on a créer un #}
+{#                                    formulaire pour pouvoir bénéficier de la methode avec la valeur 'POST' qui nous #}
+{#                                    servira valider les instructions de la vue qui sera appelé, et aussion on profite de#}
+{#                                    l'attribut action qui nous permet de mettre l'url ou le nom de la vue qui sera appelée #}
 
+                                    {# lorsqu'on va cliquer sur le bouton et ici on a utilisé le tag de template de type url #}
+{#                                    qui contient le nom qu'on a donné à l'url de la vue#}
+
+                                    {# Lorqu'on crée ce bouton de suppression pour chaque enregistrement, directement on #}
+{#                                    recupere leurs id avec st.id, de telle facon que lorsqu'on appuiyera sur le bouton #}
+{#                                    supprimer l'attibut action fera à ce que l'url qui doit apparaitre c'est l'url dont #}
+{#                                    le nom est 'suppression_données' et apres cet url est colé l'id de l'enregistrement #}
+{#                                    en question #}
+                                    <form action="{% url 'suppression_données' st.id %}" method="POST" class="d-inline">
+                                        {% csrf_token %}
+                                        <input type="submit" class="btn btn-danger" value="Supprimer">
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+{#          Sinon on affiche qu'il n'y a rie dans la base de données #}
+            {% else %}
+                <h4 class="text-center alert alert-warning">Pas d'enregistrement</h4>
+            {% endif %}
+        </div>
     </div>
+
 {% endblock %}
 
 

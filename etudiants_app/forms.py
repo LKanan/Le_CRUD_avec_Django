@@ -21,5 +21,7 @@ class StudentRegistration(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
-            'password': forms.PasswordInput(attrs={'class': 'form-control'}),
+            # render_value=True permet de donner la possibilité d'afficher le mot de passe  d'un etudiant lorsqu'on
+            # cherche à modifier ses informations
+            'password': forms.PasswordInput(render_value=True, attrs={'class': 'form-control'}),
         }
