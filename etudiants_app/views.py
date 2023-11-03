@@ -42,7 +42,10 @@ def delete_data(request, id):
 # cette fonction permet de modifier les informations d'un étudiant
 def update_data(request, id):
     if request.method == 'POST':
+        # On recupere les informations de l'etudiant dans l'objet enregistrement
         enregistrement = Student.objects.get(pk=id)
+        # Ici le parametre request.POST est utilisé pour passer les données soumises par l'utilisateur au formulaire, mais
+        # instance=enregistrement est utilisé pour préremplir les champs d'un formulaire avec des informations préexistantes
         form = StudentRegistration(request.POST, instance=enregistrement)
         if form.is_valid():
             form.save()
